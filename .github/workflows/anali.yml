@@ -41,6 +41,7 @@ jobs:
       - name: Run Security Scan
         run: |
           mkdir -p reports
+          chmod 777 reports
           docker run --rm \
             -v ${{ github.workspace }}:/scan \
             -v ${{ github.workspace }}/reports:/reports \
@@ -57,3 +58,5 @@ jobs:
           name: anali-scan-report
           path: reports/
           retention-days: 30
+          if-no-files-found: error
+          compression-level: 6
